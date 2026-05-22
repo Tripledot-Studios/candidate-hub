@@ -161,6 +161,9 @@ body{font-family:var(--sans);background:#FDF8F4;color:var(--text);font-size:15px
 
 /* CARDS */
 .h-card{background:white;border-radius:12px;border:1px solid var(--border);padding:16px 20px;margin-top:10px;}
+.h-card:nth-child(3n+1){border-left:4px solid #E8650A;}
+.h-card:nth-child(3n+2){border-left:4px solid #00B899;}
+.h-card:nth-child(3n+3){border-left:4px solid #2B7DC8;}
 .h-card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;}
 .h-card-body{font-size:13px;color:var(--text-mid);line-height:1.7;}
 
@@ -182,19 +185,20 @@ body{font-family:var(--sans);background:#FDF8F4;color:var(--text);font-size:15px
 /* VALUES */
 .h-values{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
 .h-value{background:white;border:1px solid var(--border);border-radius:12px;padding:16px 18px;transition:transform 0.2s,box-shadow 0.2s;}
-.h-value:nth-child(1){border-top:3px solid var(--orange);}
-.h-value:nth-child(2){border-top:3px solid #00B899;}
-.h-value:nth-child(3){border-top:3px solid #2B7DC8;}
-.h-value:nth-child(4){border-top:3px solid #E8650A;}
+.h-value:nth-child(3n+1){border-left:4px solid #E8650A;}
+.h-value:nth-child(3n+2){border-left:4px solid #00B899;}
+.h-value:nth-child(3n+3){border-left:4px solid #2B7DC8;}
 .h-value:nth-child(odd):hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(244,123,32,0.15);}
-.h-value:nth-child(even):hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,184,153,0.15);}
-.h-value-icon{font-size:24px;margin-bottom:8px;}
+.h-value:nth-child(even):hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,184,153,0.15);}.h-value-icon{font-size:24px;margin-bottom:8px;}
 .h-value-name{font-size:13px;font-weight:800;color:var(--text);margin-bottom:3px;letter-spacing:-0.01em;}
 .h-value-desc{font-size:12px;color:var(--text-mid);line-height:1.6;}
 
 /* STUDIOS */
 .h-studios{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
 .h-studio{background:white;border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.h-studio:nth-child(3n+1){border-left:4px solid #E8650A;}
+.h-studio:nth-child(3n+2){border-left:4px solid #00B899;}
+.h-studio:nth-child(3n+3){border-left:4px solid #2B7DC8;}
 .h-studio.active{border-color:var(--orange);background:var(--orange-light);}
 .h-studio-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
 .h-studio.active .h-studio-name{color:var(--orange-dark);}
@@ -235,18 +239,15 @@ body{font-family:var(--sans);background:#FDF8F4;color:var(--text);font-size:15px
 /* BENEFITS */
 .h-benefits{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;}
 .h-benefit{background:white;border:1px solid var(--border);border-radius:10px;padding:13px 16px;}
+.h-benefit:nth-child(3n+1){border-left:4px solid #E8650A;}
+.h-benefit:nth-child(3n+2){border-left:4px solid #00B899;}
+.h-benefit:nth-child(3n+3){border-left:4px solid #2B7DC8;}
 .h-benefit:nth-child(1) .h-benefit-cat{color:var(--orange-dark);}
-.h-benefit:nth-child(1){border-top:2px solid var(--orange);}
 .h-benefit:nth-child(2) .h-benefit-cat{color:#00B899;}
-.h-benefit:nth-child(2){border-top:2px solid #00B899;}
 .h-benefit:nth-child(3) .h-benefit-cat{color:#2B7DC8;}
-.h-benefit:nth-child(3){border-top:2px solid #2B7DC8;}
 .h-benefit:nth-child(4) .h-benefit-cat{color:#00B899;}
-.h-benefit:nth-child(4){border-top:2px solid #E8650A;}
 .h-benefit:nth-child(5) .h-benefit-cat{color:var(--orange-dark);}
-.h-benefit:nth-child(5){border-top:2px solid var(--orange);}
 .h-benefit:nth-child(6) .h-benefit-cat{color:#00B899;}
-.h-benefit:nth-child(6){border-top:2px solid #00B899;}
 .h-benefit-cat{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#00B899;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
 .h-blist{list-style:none;display:flex;flex-direction:column;gap:6px;}
 .h-blist li{font-size:12px;color:var(--text-mid);padding-left:14px;position:relative;line-height:1.5;}
@@ -297,8 +298,7 @@ body{font-family:var(--sans);background:#FDF8F4;color:var(--text);font-size:15px
 .h-prep-item { border-left-color: var(--orange); }
 
 /* Alternating value card accent */
-.h-value:nth-child(odd) { border-top: 2px solid var(--orange-light); }
-.h-value:nth-child(even) { border-top: 2px solid var(--teal-light); }
+
 
 /* Teal on FAQ open icon already orange — add teal variant */
 .h-faq-item:nth-child(1).open .h-faq-icon{background:var(--orange);}
@@ -1764,7 +1764,7 @@ function update(){
           <div class="h-person-role">${iv.title||'Talent Partner'}</div>
           <div style="font-size:12px;color:var(--text-mid);line-height:1.5;margin-top:4px;">Your first point of contact throughout the process. Reach out anytime with questions.</div>
           <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;">
-            ${iv.linkedin?`<a href="${iv.linkedin}" target="_blank" style="font-size:11px;color:#00B899;font-weight:700;text-decoration:none;">LinkedIn →</a>`:''}
+            ${iv.linkedin?`<a href="${iv.linkedin}" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin:4px 0 6px;font-size:11px;font-weight:600;color:#2B7DC8;text-decoration:none;">View LinkedIn</a>`:''}
           </div>
         </div>
       </div>`;
@@ -1772,15 +1772,17 @@ function update(){
 
     if(otherInterviewers.filter(iv => iv.name).length){
       set('out-team-intro', '');
-      peopleEl.innerHTML = otherInterviewers.map(iv => {
+      peopleEl.innerHTML = otherInterviewers.map((iv, idx) => {
         if(!iv.name) return '';
         const avatar = initials(iv.name);
-        const borderColor = iv.type === 'hm' ? 'var(--orange)' : 'var(--border)';
+        const borderColor = iv.type === 'tp' ? 'var(--orange)' : iv.type === 'hm' ? '#00B899' : iv.type === 'interviewer' ? '#2B7DC8' : 'var(--orange)';
+        const borderColors = ['var(--orange)','#00B899','#2B7DC8'];
+        const bc = borderColors[idx % 3];
         const badge = iv.type === 'hm' ? '<div class="h-person-tag">Hiring Manager</div>' :
                       iv.type === 'interviewer' ? '<div class="h-person-tag" style="background:var(--teal-light);color:var(--teal-dark);">Interviewer</div>' :
                       iv.type === 'tp' ? '<div class="h-person-tag" style="background:#E0F7F3;color:#00B899;">Talent Partner</div>' :
                       '<div class="h-person-tag" style="background:var(--brand-light);color:var(--brand-dark);">Panel</div>';
-        return `<div class="h-person" style="border-left:3px solid ${borderColor};">
+        return `<div class="h-person" style="border-left:3px solid ${bc};">
           <div class="h-person-avatar">${avatar}</div>
           <div class="h-person-info">
             ${badge}
