@@ -17,6 +17,10 @@
 const MV_MCP_URL = 'https://mcp.metaview.ai/mcp';
 const MV_REDIRECT_URI = 'https://tripledot-studios.github.io/candidate-hub/metaview-callback.html';
 
+// Some of Metaview's OAuth endpoints (client registration, token exchange) block direct
+// browser calls via CORS. This worker forwards those specific calls server-side instead.
+const MV_OAUTH_PROXY_URL = 'https://metaview-import.tds-886.workers.dev';
+
 // If Metaview's server does NOT support Dynamic Client Registration, set a manually-issued
 // client ID here (ask Metaview for one, tied to MV_REDIRECT_URI above) and DCR will be skipped.
 const MV_MANUAL_CLIENT_ID = ''; // leave blank to attempt automatic DCR
@@ -72,15 +76,18 @@ async function mvEnsureClientId(config) {
     throw new Error('Metaview\'s OAuth server does not support automatic registration (DCR) and no manual client ID is configured. Ask Metaview for a client_id and set MV_MANUAL_CLIENT_ID in metaview-oauth.js.');
   }
 
-  const res = await fetch(config.registration_endpoint, {
+  const res = await fetch(`${MV_OAUTH_PROXY_URL}/oauth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      client_name: 'Tripledot Candidate Hub',
-      redirect_uris: [MV_REDIRECT_URI],
-      grant_types: ['authorization_code', 'refresh_token'],
-      response_types: ['code'],
-      token_endpoint_auth_method: 'none', // public client — PKCE only, no secret
+      target: config.registration_endpoint,
+      payload: {
+        client_name: 'Tripledot Candidate Hub',
+        redirect_uris: [MV_REDIRECT_URI],
+        grant_types: ['authorization_code', 'refresh_token'],
+        response_types: ['code'],
+        token_endpoint_auth_method: 'none', // public client — PKCE only, no secret
+      },
     }),
   });
 
@@ -89,6 +96,7 @@ async function mvEnsureClientId(config) {
     throw new Error(`Client registration failed (HTTP ${res.status}): ${body.slice(0, 200)}`);
   }
   const data = await res.json();
+  if (data.error) throw new Error(`Client registration failed: ${data.error}`);
   localStorage.setItem(MV_KEYS.clientId, data.client_id);
   return data.client_id;
 }
@@ -168,15 +176,18 @@ async function mvConnect() {
 }
 
 async function mvExchangeCode(config, clientId, code, verifier) {
-  const res = await fetch(config.token_endpoint, {
+  const res = await fetch(`${MV_OAUTH_PROXY_URL}/oauth/token`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: MV_REDIRECT_URI,
-      client_id: clientId,
-      code_verifier: verifier,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      target: config.token_endpoint,
+      payload: {
+        grant_type: 'authorization_code',
+        code,
+        redirect_uri: MV_REDIRECT_URI,
+        client_id: clientId,
+        code_verifier: verifier,
+      },
     }),
   });
   if (!res.ok) {
@@ -184,6 +195,7 @@ async function mvExchangeCode(config, clientId, code, verifier) {
     throw new Error(`Token exchange failed (HTTP ${res.status}): ${body.slice(0, 200)}`);
   }
   const data = await res.json();
+  if (data.error) throw new Error(`Token exchange failed: ${data.error}`);
   mvStoreTokens(data);
   return data;
 }
@@ -214,13 +226,17 @@ async function mvGetValidToken() {
   try {
     const config = await mvDiscoverConfig();
     const clientId = await mvEnsureClientId(config);
-    const res = await fetch(config.token_endpoint, {
+    const res = await fetch(`${MV_OAUTH_PROXY_URL}/oauth/token`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: refreshToken, client_id: clientId }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        target: config.token_endpoint,
+        payload: { grant_type: 'refresh_token', refresh_token: refreshToken, client_id: clientId },
+      }),
     });
     if (!res.ok) return token; // refresh failed — fall back to old token, let the caller handle a 401
     const data = await res.json();
+    if (data.error) return token;
     mvStoreTokens(data);
     return data.access_token;
   } catch {
