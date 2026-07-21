@@ -41,16 +41,19 @@ async function mvDiscoverConfig() {
     try { return JSON.parse(cached); } catch { /* fall through and re-discover */ }
   }
 
-  // RFC 9728: ask the MCP server itself where its authorization server is
+  // RFC 9728: ask the MCP server itself where its authorization server is,
+  // and what "resource" identifier tokens need to be scoped to for this server.
   const mcpUrl = new URL(MV_MCP_URL);
   const prmUrl = `${mcpUrl.origin}/.well-known/oauth-protected-resource${mcpUrl.pathname}`;
   let authServerUrl = mcpUrl.origin; // fallback: assume same origin
+  let resource = MV_MCP_URL; // fallback: use the MCP URL itself as the resource identifier
 
   try {
     const prmRes = await fetch(prmUrl);
     if (prmRes.ok) {
       const prm = await prmRes.json();
       if (prm.authorization_servers?.[0]) authServerUrl = prm.authorization_servers[0];
+      if (prm.resource) resource = prm.resource;
     }
   } catch { /* fall back to same-origin guess below */ }
 
@@ -59,6 +62,7 @@ async function mvDiscoverConfig() {
   const asRes = await fetch(asMetaUrl);
   if (!asRes.ok) throw new Error(`Could not discover Metaview's OAuth configuration (HTTP ${asRes.status} from ${asMetaUrl})`);
   const config = await asRes.json();
+  config.resource = resource; // carry this through so auth/token requests can scope the token correctly
 
   localStorage.setItem(MV_KEYS.authServerConfig, JSON.stringify(config));
   return config;
@@ -140,6 +144,7 @@ async function mvConnect() {
   authUrl.searchParams.set('code_challenge', challenge);
   authUrl.searchParams.set('code_challenge_method', 'S256');
   authUrl.searchParams.set('state', state);
+  authUrl.searchParams.set('resource', config.resource);
 
   return new Promise((resolve, reject) => {
     const popup = window.open(authUrl.toString(), 'metaview-connect', 'width=520,height=680');
@@ -187,6 +192,7 @@ async function mvExchangeCode(config, clientId, code, verifier) {
         redirect_uri: MV_REDIRECT_URI,
         client_id: clientId,
         code_verifier: verifier,
+        resource: config.resource,
       },
     }),
   });
@@ -231,7 +237,7 @@ async function mvGetValidToken() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         target: config.token_endpoint,
-        payload: { grant_type: 'refresh_token', refresh_token: refreshToken, client_id: clientId },
+        payload: { grant_type: 'refresh_token', refresh_token: refreshToken, client_id: clientId, resource: config.resource },
       }),
     });
     if (!res.ok) return token; // refresh failed — fall back to old token, let the caller handle a 401
