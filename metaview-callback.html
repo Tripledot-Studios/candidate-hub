@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Connecting to Metaview…</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #FAF9F7; color: #333; }
+  .box { text-align: center; }
+  .spinner { width: 32px; height: 32px; border: 3px solid #E8E8E8; border-top-color: #00B899; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .msg { font-size: 14px; color: #666; }
+  .error { color: #B91C1C; }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="spinner" id="spinner"></div>
+    <div class="msg" id="msg">Completing connection to Metaview…</div>
+  </div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  const state = params.get('state');
+  const error = params.get('error') || params.get('error_description');
+
+  function finish(payload) {
+    if (window.opener) {
+      window.opener.postMessage(Object.assign({ source: 'metaview-oauth-callback' }, payload), window.location.origin);
+      setTimeout(() => window.close(), 300);
+    } else {
+      // Opened directly (not as a popup) — nothing to relay to, just show the result
+      document.getElementById('spinner').style.display = 'none';
+      const msg = document.getElementById('msg');
+      if (payload.error) {
+        msg.textContent = 'Connection failed: ' + payload.error;
+        msg.classList.add('error');
+      } else {
+        msg.textContent = 'Connected. You can close this window.';
+      }
+    }
+  }
+
+  if (error) {
+    finish({ error });
+  } else if (code && state) {
+    finish({ code, state });
+  } else {
+    finish({ error: 'No authorization code received from Metaview.' });
+  }
+})();
+</script>
+</body>
+</html>
