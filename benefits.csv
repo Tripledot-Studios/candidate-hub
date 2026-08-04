@@ -1,0 +1,107 @@
+location_key,location_label,category,item
+london,"London, UK",Time off,25 days paid holiday + bank holidays
+london,"London, UK",Time off,20 days fully remote working per year
+london,"London, UK",Hybrid working,"3 days in office (Tue, Wed + 1 day of your choice)"
+london,"London, UK",Food & office,Free lunch daily — £12/day via JustEat when in office
+london,"London, UK",Health & wellbeing,"Private Medical Cover with Bupa (opt-in, P11d)"
+london,"London, UK",Health & wellbeing,Health Cash Plan with Medicash (opt-in)
+london,"London, UK",Health & wellbeing,"Dental Cover (opt-in, P11d)"
+london,"London, UK",Health & wellbeing,Employee Assistance Program
+london,"London, UK",Health & wellbeing,Family Forming / Fertility Support
+london,"London, UK",Financial,Life Assurance & Group Income Cover
+london,"London, UK",Financial,Pension — 4% contributory match or qualifying earnings scheme
+london,"London, UK",Financial,Cycle to Work salary sacrifice scheme
+london,"London, UK",Growth,Continuous Professional Development
+london,"London, UK",Growth,Regular company events & rewards (quarterly)
+barcelona,"Barcelona, Spain",Time off,25 days paid holiday + bank holidays
+barcelona,"Barcelona, Spain",Time off,20 days fully remote working per year
+barcelona,"Barcelona, Spain",Hybrid working,"3 days in office (Tue, Wed + 1 day of your choice)"
+barcelona,"Barcelona, Spain",Health & wellbeing,Private Medical Cover
+barcelona,"Barcelona, Spain",Health & wellbeing,Life & Critical Illness Cover
+barcelona,"Barcelona, Spain",Health & wellbeing,Employee Assistance Program
+barcelona,"Barcelona, Spain",Health & wellbeing,Family Forming / Fertility Support
+barcelona,"Barcelona, Spain",Health & wellbeing,Sport Compensation
+barcelona,"Barcelona, Spain",Perks,Meal and Transport Vouchers
+barcelona,"Barcelona, Spain",Perks,English & Spanish Classes
+barcelona,"Barcelona, Spain",Growth,Continuous Professional Development
+barcelona,"Barcelona, Spain",Growth,Regular company events & rewards
+warsaw,"Warsaw, Poland",Time off,26 days paid holiday + bank holidays
+warsaw,"Warsaw, Poland",Time off,20 days fully remote working per year
+warsaw,"Warsaw, Poland",Hybrid working,"3 days in office (Tue, Wed + 1 day of your choice)"
+warsaw,"Warsaw, Poland",Food & office,Free daily lunch in office via Pyszne.pl
+warsaw,"Warsaw, Poland",Health & wellbeing,Private Medical Cover with Luxmed (you & family)
+warsaw,"Warsaw, Poland",Health & wellbeing,Multisport Plus Card
+warsaw,"Warsaw, Poland",Health & wellbeing,Employee Assistance Program
+warsaw,"Warsaw, Poland",Health & wellbeing,Family Forming / Fertility Support
+warsaw,"Warsaw, Poland",Perks,English & Polish Classes
+warsaw,"Warsaw, Poland",Growth,Continuous Professional Development
+warsaw,"Warsaw, Poland",Growth,Regular company events & rewards
+jakarta,"Jakarta, Indonesia",Time off,24 days paid holiday + bank holidays (12 days year one)
+jakarta,"Jakarta, Indonesia",Time off,20 days fully remote working per year
+jakarta,"Jakarta, Indonesia",Hybrid working,"3 days in office (Tue, Wed + 1 day of your choice)"
+jakarta,"Jakarta, Indonesia",Food & office,Daily breakfast and lunch provided in office
+jakarta,"Jakarta, Indonesia",Health & wellbeing,Private Health Insurance (you & family)
+jakarta,"Jakarta, Indonesia",Health & wellbeing,BPJS Health
+jakarta,"Jakarta, Indonesia",Health & wellbeing,BPJS Social
+jakarta,"Jakarta, Indonesia",Health & wellbeing,Employee Assistance Program
+jakarta,"Jakarta, Indonesia",Health & wellbeing,Family Forming / Fertility Support
+jakarta,"Jakarta, Indonesia",Perks,Festivity Allowance
+jakarta,"Jakarta, Indonesia",Perks,English Classes
+minsk,"Minsk, Belarus",Time off,20 business days paid holiday + bank holidays
+minsk,"Minsk, Belarus",Time off,20 business days fully remote working per year
+minsk,"Minsk, Belarus",Hybrid working,"3 days in office (Tue, Wed + 1 day of your choice)"
+minsk,"Minsk, Belarus",Food & office,Free daily lunch in office
+minsk,"Minsk, Belarus",Food & office,Taxi reimbursement for travel to office
+minsk,"Minsk, Belarus",Health & wellbeing,Private Medical Cover
+minsk,"Minsk, Belarus",Health & wellbeing,Sport Compensation
+minsk,"Minsk, Belarus",Perks,English Classes
+minsk,"Minsk, Belarus",Growth,Continuous Professional Development
+melbourne,"Melbourne, Australia",Time off,25 days paid holiday + bank holidays (20 days + 5 days bonus)
+melbourne,"Melbourne, Australia",Time off,20 days fully remote working per year
+melbourne,"Melbourne, Australia",Hybrid working,3 days in office per week
+melbourne,"Melbourne, Australia",Health & wellbeing,Private Medical Cover — monthly stipend
+melbourne,"Melbourne, Australia",Health & wellbeing,Employee Assistance Program
+melbourne,"Melbourne, Australia",Health & wellbeing,Family Forming / Fertility Support
+melbourne,"Melbourne, Australia",Financial,Company-paid Superannuation plan
+melbourne,"Melbourne, Australia",Growth,Continuous Professional Development
+berlin,"Berlin, Germany",Time off,25 days paid holiday + bank holidays (20 days + 5 days bonus)
+berlin,"Berlin, Germany",Food & office,Free daily lunch via Wolt when in office
+berlin,"Berlin, Germany",Health & wellbeing,"Supplemental Health Insurance — €1,200/year via Continentale (glasses, dental, massage etc.)"
+berlin,"Berlin, Germany",Health & wellbeing,Employee Assistance Program
+berlin,"Berlin, Germany",Financial,100% public transport reimbursement (BVG ticket)
+berlin,"Berlin, Germany",Financial,Opt-in employer pension plan via Degura
+berlin,"Berlin, Germany",Growth,Continuous Professional Development
+canada,Canada,Time off,15 days paid holiday + bank holidays (+5 days every 5 years of service)
+canada,Canada,Hybrid working,2 days in office (Tue & Thu); Wed optional with lunch provided
+canada,Canada,Health & wellbeing,"Comprehensive Medical, Dental & Vision coverage"
+canada,Canada,Health & wellbeing,$500/year Wellness Benefit
+canada,Canada,Health & wellbeing,Employee Assistance Program
+canada,Canada,Family,Generous parental leave
+canada,Canada,Family,Family-friendly culture
+canada,Canada,Growth,Continuous Professional Development
+canada,Canada,Growth,Regular company events
+usa,USA (Office-based),Time off,Flexible Discretionary Time Off + bank holidays
+usa,USA (Office-based),Working,"Remote-first — Dallas office available, no expectation to attend"
+usa,USA (Office-based),Health & wellbeing,"Comprehensive Medical, Dental & Vision coverage"
+usa,USA (Office-based),Health & wellbeing,Employee Assistance Program
+usa,USA (Office-based),Financial,Generous 401k match
+usa,USA (Office-based),Financial,Discretionary bonuses
+usa,USA (Office-based),Financial,Competitive salaries
+usa,USA (Office-based),Family,Generous parental leave
+usa,USA (Office-based),Family,Family-friendly culture
+usa,USA (Office-based),Growth,Continuous Professional Development
+usa,USA (Office-based),Growth,Yearly on-site company events
+usa-eor,USA (Remote / EOR),Time off,Flexible Discretionary Time Off + bank holidays
+usa-eor,USA (Remote / EOR),Health & wellbeing,"Comprehensive Medical, Dental & Vision coverage"
+usa-eor,USA (Remote / EOR),Financial,Generous 401k match
+usa-eor,USA (Remote / EOR),Financial,Discretionary bonuses
+usa-eor,USA (Remote / EOR),Financial,Competitive salaries
+usa-eor,USA (Remote / EOR),Family,Generous parental leave
+usa-eor,USA (Remote / EOR),Family,Family-friendly culture
+usa-eor,USA (Remote / EOR),Growth,Continuous Professional Development
+usa-eor,USA (Remote / EOR),Growth,Yearly on-site company events
+row-eor,Remote — Rest of World (EOR),Time off,Statutory time off per local requirements + bank holidays
+row-eor,Remote — Rest of World (EOR),Health & wellbeing,Private Healthcare or Healthcare stipend subject to country eligibility
+row-eor,Remote — Rest of World (EOR),Growth,Continuous Professional Development
+contractor,Remote — Contractor,Contract terms,No paid holidays or standard employment benefits
+contractor,Remote — Contractor,Contract terms,Competitive day/project rate
