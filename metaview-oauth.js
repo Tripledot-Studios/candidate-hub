@@ -82,7 +82,7 @@ async function mvEnsureClientId(config) {
 
   const res = await fetch(`${MV_OAUTH_PROXY_URL}/oauth/register`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-Hub-Secret': HUB_SHARED_SECRET },
     body: JSON.stringify({
       target: config.registration_endpoint,
       payload: {
@@ -183,7 +183,7 @@ async function mvConnect() {
 async function mvExchangeCode(config, clientId, code, verifier) {
   const res = await fetch(`${MV_OAUTH_PROXY_URL}/oauth/token`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-Hub-Secret': HUB_SHARED_SECRET },
     body: JSON.stringify({
       target: config.token_endpoint,
       payload: {
@@ -234,7 +234,7 @@ async function mvGetValidToken() {
     const clientId = await mvEnsureClientId(config);
     const res = await fetch(`${MV_OAUTH_PROXY_URL}/oauth/token`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-Hub-Secret': HUB_SHARED_SECRET },
       body: JSON.stringify({
         target: config.token_endpoint,
         payload: { grant_type: 'refresh_token', refresh_token: refreshToken, client_id: clientId, resource: config.resource },
