@@ -1657,7 +1657,12 @@ async function publishHub(){
   const studioName = val('f-studio-name') || (studio ? studio.name : '');
   if(!role || role === 'Role Title'){ alert('Please fill in a role title before publishing.'); return; }
   const slug = (role+(studioName?'-'+studioName:'')).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);
-  const filename = `hubs/${slug}-${Date.now()}.html`;
+  // Random, unguessable identifier instead of a timestamp — a sequential Unix time value
+  // (e.g. "-1735689600.html") lets someone guess nearby values and stumble onto other
+  // candidates' hub pages. 16 random bytes (128 bits) makes that infeasible.
+  const randomBytes = crypto.getRandomValues(new Uint8Array(16));
+  const randomId = Array.from(randomBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+  const filename = `hubs/${slug}-${randomId}.html`;
   const hubEl = document.querySelector('.hub');
   if(!hubEl){ alert('Hub not found.'); return; }
   const standaloneHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>'+role+(studioName?' — '+studioName:'')+' | Candidate Hub</title><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"><style>'+document.querySelector('style').textContent+'body{background:var(--off);}.app{display:block;}.editor{display:none;}.hub{overflow-y:unset;}</style></head><body><div class="app"><div class="hub">'+hubEl.innerHTML+'</div></div><scr'+'ipt>document.querySelectorAll(".h-faq-q").forEach(q=>{q.addEventListener("click",()=>q.closest(".h-faq-item").classList.toggle("open"));});<'+'/scr'+'ipt></body></html>';
